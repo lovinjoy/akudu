@@ -5,12 +5,9 @@
 __author__ = 'Zagfai'
 __date__ = '2023-03'
 
+import logging
 import asyncio
 import akudu
-
-
-# cli = akudu.Client('192.168.0.111', 7051)
-cli = akudu.Client('192.168.50.112', 7051)
 
 
 async def op():
@@ -25,5 +22,13 @@ async def op_instead():
     print(status)
     await conn.close()
 
-# asyncio.run(op())
-asyncio.run(op_instead())
+if __name__ == "__main__":
+    logging.basicConfig(
+            level=logging.DEBUG,
+            format="[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s")
+
+
+    # cli = akudu.Client('192.168.0.111', 7051)
+    cli = akudu.Client('192.168.50.112', 7051)
+    asyncio.run(op_instead())
+    asyncio.run(op())
