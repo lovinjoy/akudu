@@ -30,10 +30,7 @@ It is recommanded to use Python == 3.10, others are not tested.
 
 3. Here are some frequently used calls, for more please refer to the documentation.
     ``` python
-    cli.ping()
     cli.list_tables()
-    cli.insert()
-    cli.scan()
     ```
 
 
@@ -67,7 +64,7 @@ It is recommanded to use Python == 3.10, others are not tested.
 python -m venv env
 source env/bin/activate
 pip install protobuf
-python -m test.test_tcp
+python -m test.test
 ```
 
 ### Generate protobuf files

@@ -38,7 +38,7 @@ class Message:
         body = utils.varint_encode(self.body.ByteSize()) + body
 
         buf = header_size_to_bytes(len(header + body)) + header + body
-        logging.debug(f'Request: {header}, {body}')
+        logger.debug(f'Request: {header}, {body}')
 
         self.buf = buf
         return buf
@@ -73,8 +73,12 @@ class Message:
         message_size = int.from_bytes(message_size_bytes, 'big')
 
         buf = await stream_reader.readexactly(message_size)
-
         self.buf = message_size_bytes + buf
+
+        buffer = io.BytesIO(buf)
+        header_size = utils.varint_decode_stream(buffer)
+        self.header = ResponseHeader.FromString(buffer.read(header_size))
+
         self.is_parsed = False
         return self
 

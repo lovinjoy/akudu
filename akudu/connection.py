@@ -37,10 +37,11 @@ class Connection:
         return self
 
     async def close(self):
-        # TODO finish message-queues and callbacks
+        self._client._conn = None
+        await self.messenger.retire()
         self._writer.close()
         await self._writer.wait_closed()
-        logging.debug("Akudu connection closed.")
+        logger.debug("Akudu connection closed.")
 
     async def _keepalive(self):
         # TODO intermittently send and check receive, auto reconnect

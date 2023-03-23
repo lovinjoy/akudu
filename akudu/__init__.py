@@ -5,7 +5,7 @@
 __author__ = 'Zagfai'
 __date__ = '2023-03'
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 from .client import Client
 

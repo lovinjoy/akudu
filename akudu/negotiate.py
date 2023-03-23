@@ -36,7 +36,7 @@ class SASL_Plain:
 
         resp_msg = await Message().load_from_stream(reader)
         resp_msg.parse(NegotiatePB)
-        logging.debug(f'Negotiate received: {resp_msg}')
+        logger.debug(f'Negotiate received: {resp_msg}')
 
         # sasl init
         header_pb = RequestHeader(call_id=-33)
@@ -49,11 +49,11 @@ class SASL_Plain:
 
         resp_msg = await Message().load_from_stream(reader)
         resp_msg.parse(NegotiatePB)
-        logging.debug(f'SASL init received: {resp_msg}')
+        logger.debug(f'SASL init received: {resp_msg}')
 
         # Connection Context
         header_pb = RequestHeader(call_id=-3)
         body_pb = ConnectionContextPB()
         writer.write(Message(header_pb, body_pb).serialize())
 
-        logging.info("Negotiate Finished with SASL Plain")
+        logger.info("Negotiate Finished with SASL Plain")
